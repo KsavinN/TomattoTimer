@@ -1,6 +1,8 @@
 import React from 'react';
+import { TimeBoxEditor } from './TimeBoxEditor';
+import TimeBoxList from './TimeBoxList';
 
-import { TimeBoxEditor, TimeBoxList } from "./remaing-componnts";
+
 
 function App() {
     return (
