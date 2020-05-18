@@ -1,15 +1,25 @@
-.ProgressBar {
+.progress {
     display: flex;
     justify-content: flex-start;
     border: 1px solid orangered;
     border-radius: 5px;
     height: 25px;
     margin-bottom: 20px;
-    .reverse {
+
+    &--reverse {
       justify-content: flex-end;
     }
-    >div {
+
+    &__bar {
       height: 100%;
+      background-color: black;
+    }
+
+    &--color-red {
       background-color: orangered;
+    }
+
+    &--big {
+      height: 50%;
     }
   }
