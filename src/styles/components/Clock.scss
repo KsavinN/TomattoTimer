@@ -1,0 +1,18 @@
+.clock {
+
+    &__hours {
+        color: black;
+    }
+
+    &__minutes {
+        color: lighten($color: #000000, $amount: 15);
+    }
+
+    &__seconds {
+        color: lighten($color: #000000, $amount: 30);
+    }
+
+    &__separator {
+        color: grey;
+    }
+}
