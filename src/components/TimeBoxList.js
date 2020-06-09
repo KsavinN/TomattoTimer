@@ -3,6 +3,8 @@ import { TimeBoxCreator } from './TimeBoxCreator';
 import { TimeBox } from "./TimeBox";
 
 import * as uuid from 'uuid';
+import { TimeBoxEditor } from './TimeBoxEditor';
+import { CurrentTimeBox } from './CurrentTimeBox';
 
 export default class TimeBoxList extends React.Component {
     state = {
@@ -40,10 +42,12 @@ export default class TimeBoxList extends React.Component {
     };
     render() {
         const { timeboxes } = this.state;
+        const { title, totalTimeInMinutes } = timeboxes[0];
         return (<>
             <TimeBoxCreator onCreate={this.handleCreate} />
             {timeboxes.map((timeBox, index) => (<TimeBox onDelete={() => this.removeTimeBox(index)} onEdit={this.updateTiemBox} key={timeBox.id} id={timeBox.id} title={timeBox.title} totalTimeInMinutes={timeBox.totalTimeInMinutes} />))}
-
+            <TimeBoxEditor />
+            <CurrentTimeBox title={title} totalTimeInMinutes={totalTimeInMinutes} />
 
         </>);
     }
