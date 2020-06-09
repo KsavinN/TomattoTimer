@@ -15,15 +15,15 @@ export default function prettyDir(obj,str = "") {
 
     if(type === 'object') {
         if (Array.isArray(obj)) {
-            console.group('%c ' + str + '%c [' + obj + ']',pink, green);
-            for (let i of obj) {
-                prettyDir(i);
+            console.groupCollapsed('%c ' + str + '%c [' + obj + ']',pink, green);
+            for (let i in obj) {
+                prettyDir(obj[i],i+":");
             }
             console.groupEnd();
         } else {
-            console.group('%c ' + obj, pink);
+            console.groupCollapsed('%c ' + obj, pink);
             for (let i in obj) {
-                prettyDir(obj[i],i);
+                prettyDir(obj[i],i+":");
             }
             console.groupEnd();
         }

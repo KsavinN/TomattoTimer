@@ -12,7 +12,8 @@ export default class TimeBoxList extends React.Component {
             { id: uuid.v4(), title: 'test', totalTimeInMinutes: 10 },
             { id: uuid.v4(), title: 'test2', totalTimeInMinutes: 5 },
             { id: uuid.v4(), title: 'test3', totalTimeInMinutes: 1 },
-        ]
+        ],
+        isEditableCurrent: false
     };
     addTimeBox = (timeBox) => {
         this.setState(prevState => {
@@ -30,6 +31,7 @@ export default class TimeBoxList extends React.Component {
         });
     };
     updateTiemBox = (updatedTiemBox) => {
+        console.log(updatedTiemBox);
         this.setState(prevState => {
             const timeboxes = prevState.timeboxes.map((timebox) => {
                 return timebox.id === updatedTiemBox.id ? updatedTiemBox : timebox;
@@ -40,14 +42,40 @@ export default class TimeBoxList extends React.Component {
     handleCreate = (timeBoxCreated) => {
         this.addTimeBox(timeBoxCreated);
     };
+
+    handleEditCurrentTimeBox = () => {
+        this.setState(prevState => ({ isEditableCurrent: true }));
+    };
+
+    handleConfirm = () => {
+        this.setState(prevState => ({ isEditableCurrent: false }));
+    }
+
+    onTitleChange = (e) => {
+        const { timeboxes, } = this.state;
+        const title = e.target.value;
+        this.updateTiemBox({...timeboxes[0],title})
+    }
+
+    onTotalTimeMinuteChange = (e) => {
+        const { timeboxes, } = this.state;
+        const time = e.target.value;
+        this.updateTiemBox({...timeboxes[0],time})
+        
+    }
+
     render() {
-        const { timeboxes } = this.state;
+        const { timeboxes, isEditableCurrent } = this.state;
         const { title, totalTimeInMinutes } = timeboxes[0];
         return (<>
             <TimeBoxCreator onCreate={this.handleCreate} />
             {timeboxes.map((timeBox, index) => (<TimeBox onDelete={() => this.removeTimeBox(index)} onEdit={this.updateTiemBox} key={timeBox.id} id={timeBox.id} title={timeBox.title} totalTimeInMinutes={timeBox.totalTimeInMinutes} />))}
-            <TimeBoxEditor />
-            <CurrentTimeBox title={title} totalTimeInMinutes={totalTimeInMinutes} />
+            {isEditableCurrent ?
+                <TimeBoxEditor onTitleChange={this.onTitleChange} onTotalTimeMinuteChange={this.onTotalTimeMinuteChange}  title={title} totalTimeInMinutes={totalTimeInMinutes} onConfirm={this.handleConfirm} isEditable={this.state.isEditableCurrent} />
+                :
+                <CurrentTimeBox isEditable={this.state.isEditableCurrent} onEdit={this.handleEditCurrentTimeBox} title={title} totalTimeInMinutes={totalTimeInMinutes} />}
+            
+            
 
         </>);
     }

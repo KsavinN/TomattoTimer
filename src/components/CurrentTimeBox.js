@@ -12,6 +12,11 @@ export class CurrentTimeBox extends React.Component {
         };
         this.handleStop = this.handleStop.bind(this);
     }
+
+    componentWillUnmount() {
+        this.stopTimer();
+    }
+
     handleStart(event) {
         this.setState({
             isRunning: true
