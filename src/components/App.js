@@ -1,6 +1,6 @@
 import React from 'react';
 import TimeBoxList from './TimeBoxList';
-
+import RealTimeClock from './RealTimeClock';
 
 
 
@@ -9,7 +9,10 @@ class App extends React.Component {
   render() {
     return(
       <div className="App">
-        <h1>Kurs React Tydzien 2</h1>
+        <div>
+          <h1>Kurs React Tydzien 2</h1>
+          <RealTimeClock />
+        </div>
         <hr />
         <TimeBoxList />
       </div>
