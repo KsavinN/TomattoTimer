@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function Clock({ className="", hours = 0, minutes = 0, seconds = 0, miliseconds = 0 }) {
+export default function Clock({ className,  hours, minutes , seconds , miliseconds }) {
     const properTime = (time) => {
       if (0 > time || time > 60) {
         return (time > 60) ? '59' : '00';
@@ -34,4 +35,17 @@ export default function Clock({ className="", hours = 0, minutes = 0, seconds = 
   return (<h2 className={"clock "}>
     {properHour(hours)}{separator()}{properMinutes(minutes)}{separator()}{properSeconds(seconds)}
     </h2>)
-  }
+}
+Clock.defaultProps = {
+  className: "", 
+  hours: 0,
+  miliseconds:0
+}
+  
+Clock.propTypes = {
+  className: PropTypes.string.isRequired,
+  minutes: PropTypes.number.isRequired,
+  seconds: PropTypes.number.isRequired,
+  hours: PropTypes.number.isRequired,
+  miliseconds: PropTypes.number.isRequired
+}

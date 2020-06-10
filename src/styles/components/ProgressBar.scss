@@ -19,9 +19,23 @@
       background-color: orangered;
     }
 
+
+    &--color-green {
+      border-color: green;
+    }
+
     &--color-green > div {
       background-color: greenyellow;
     }
+
+    &--color-blue {
+      border-color: lightseagreen;
+    }
+
+    &--color-blue > div {
+      background-color: lightskyblue;
+    }
+
 
     &--big {
       height: 50%;

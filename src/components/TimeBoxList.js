@@ -3,6 +3,7 @@ import { TimeBoxCreator } from './TimeBoxCreator';
 import { TimeBox } from "./TimeBox";
 
 import * as uuid from 'uuid';
+import ErrorBoundary from "./Error";
 import { TimeBoxEditor } from './TimeBoxEditor';
 import { CurrentTimeBox } from './CurrentTimeBox';
 
@@ -67,17 +68,17 @@ export default class TimeBoxList extends React.Component {
     render() {
         const { timeboxes, isEditableCurrent } = this.state;
         const { title, totalTimeInMinutes } = timeboxes[0];
-        return (<>
-            <TimeBoxCreator onCreate={this.handleCreate} />
-            {timeboxes.map((timeBox, index) => (<TimeBox onDelete={() => this.removeTimeBox(index)} onEdit={this.updateTiemBox} key={timeBox.id} id={timeBox.id} title={timeBox.title} totalTimeInMinutes={timeBox.totalTimeInMinutes} />))}
-            {isEditableCurrent ?
-                <TimeBoxEditor onTitleChange={this.onTitleChange} onTotalTimeMinuteChange={this.onTotalTimeMinuteChange}  title={title} totalTimeInMinutes={totalTimeInMinutes} onConfirm={this.handleConfirm} isEditable={this.state.isEditableCurrent} />
-                :
-                <CurrentTimeBox isEditable={this.state.isEditableCurrent} onEdit={this.handleEditCurrentTimeBox} title={title} totalTimeInMinutes={totalTimeInMinutes} />}
-            
-            
-
-        </>);
+        return (
+            <ErrorBoundary message={"Cos poszlo nie tak ;("} >
+                <TimeBoxCreator onCreate={this.handleCreate} />
+                
+                {timeboxes.map((timeBox, index) => (<TimeBox onDelete={() => this.removeTimeBox(index)} onEdit={this.updateTiemBox}  key={timeBox.id} id={timeBox.id} title={timeBox.title} totalTimeInMinutes={timeBox.totalTimeInMinutes} />))}
+                {isEditableCurrent ?
+                    <TimeBoxEditor onTitleChange={this.onTitleChange} onTotalTimeMinuteChange={this.onTotalTimeMinuteChange}  title={title} totalTimeInMinutes={totalTimeInMinutes} onConfirm={this.handleConfirm} isEditable={this.state.isEditableCurrent} />
+                    :
+                    <CurrentTimeBox isEditable={this.state.isEditableCurrent} onEdit={this.handleEditCurrentTimeBox} title={title} totalTimeInMinutes={totalTimeInMinutes} />}
+            </ ErrorBoundary>
+        );
     }
     ;
 }

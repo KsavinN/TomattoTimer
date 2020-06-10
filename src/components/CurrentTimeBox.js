@@ -11,6 +11,7 @@ export class CurrentTimeBox extends React.Component {
             elapsedTimeInSeconds: 0
         };
         this.handleStop = this.handleStop.bind(this);
+        this.intervalId = null;
     }
 
     componentWillUnmount() {
@@ -49,12 +50,15 @@ export class CurrentTimeBox extends React.Component {
         });
     }
     startTimer() {
-        this.intervalId = window.setInterval(() => {
-            this.setState((prevState) => ({ elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + 0.01 }));
-        }, 10);
+        if (this.intervalId === null) {
+            this.intervalId = window.setInterval(() => {
+                this.setState((prevState) => ({ elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + 0.01 }));
+            }, 10);
+        }
     }
     stopTimer() {
         window.clearInterval(this.intervalId);
+        this.intervalId = null;
     }
     render() {
         const { isRunning, isPaused, pasueCount, elapsedTimeInSeconds } = this.state;
@@ -70,7 +74,7 @@ export class CurrentTimeBox extends React.Component {
         return (<div className={`TimeBox ${isEditable ? "inactive" : ""}`}>
             <h1>{title}</h1>
             <Clock seconds={seconds} minutes={minutes} className={isPaused ? 'inactive' : ''} />
-            <ProgressBar percent={progressInPercent} color="red" className={isPaused ? 'inactive' : ''} />
+            <ProgressBar percent={progressInPercent} color='blue' className={isPaused ? 'inactive' : ''} />
             <button onClick={onEdit} disabled={isEditable}>Edytuj</button>
             <button onClick={() => this.handleStart()} disabled={isRunning}>Start</button>
             <button onClick={this.handleStop} disabled={!isRunning}>Stop</button>

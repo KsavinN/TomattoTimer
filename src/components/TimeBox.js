@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from "prop-types";
+
 export class TimeBox extends React.Component {
     state = {
         isEditable: false,
@@ -14,6 +16,9 @@ export class TimeBox extends React.Component {
     onTotalTimeMinuteChange = (event) => {
         const { onEdit, id, title } = this.props;
         const totalTimeInMinutes = event.target.value;
+        if(totalTimeInMinutes <= 0) {
+            throw new Error();
+        }
         onEdit({ title, totalTimeInMinutes, id });
     };
     render() {
@@ -31,4 +36,18 @@ export class TimeBox extends React.Component {
             <button onClick={this.handleEditableChange}> {isEditable ? 'Zatwierdź' : 'Edytuj'}</button>
         </div>);
     }
+}
+
+TimeBox.defaultProps = {
+    onDelete: (event) => { console.log('on Delete', event) },
+    onEdit: (input) => { console.log('on Edit',input) }
+}
+
+
+TimeBox.propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    totalTimeInMinutes: PropTypes.number.isRequired,
+    onDelete: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired
 }
