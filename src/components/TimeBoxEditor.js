@@ -6,7 +6,7 @@ export class TimeBoxEditor extends React.Component {
         return (<div className={`TimeBoxEditor ${isEditable ? "" : "inactive"}`}>
             <label>
                 Co robisz?
-                        <input value={title} disabled={!isEditable} onChange={onTitleChange} type="text" />
+                        <input data-testid="task_input" value={title} disabled={!isEditable} onChange={onTitleChange} type="text" />
             </label>
             <br />
             <label>Ile minut?

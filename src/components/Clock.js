@@ -22,13 +22,13 @@ export default function Clock({ className,  hours, minutes , seconds , milisecon
       time = '0' + time;
       return <span className={`clock__hours`}>{(time.length > 2) ? time.slice(1) : time}</span>
     }
-    const properMili = (time) => {
-      if (0 > time || time > 999) {
-        return (time > 999) ? '999' : '000';
-      }
-      time = '00' + time;
-      return (time.length > 3) ? time.slice(time.length - 3) : time;
-    }
+    // const properMili = (time) => {
+    //   if (0 > time || time > 999) {
+    //     return (time > 999) ? '999' : '000';
+    //   }
+    //   time = '00' + time;
+    //   return (time.length > 3) ? time.slice(time.length - 3) : time;
+    // }
     
     const separator = () => <span className={`clock__separator`}>:</span>
     

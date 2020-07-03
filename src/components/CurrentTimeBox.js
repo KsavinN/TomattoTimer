@@ -2,6 +2,7 @@ import React from 'react';
 import Clock from "../components/Clock";
 import { ProgressBar } from './ProgressBar';
 import { getMinutesAndSecondsFromDurationInSeconds } from '../lib/time';
+import { ProgressArc } from './ProgresArc';
 export class CurrentTimeBox extends React.Component {
     constructor (props) {
         super(props);
@@ -72,8 +73,9 @@ export class CurrentTimeBox extends React.Component {
             this.handleStop();
         }
         return (<div className={`TimeBox ${isEditable ? "inactive" : ""}`}>
-            <h1>{title}</h1>
+            <h1 data-testid="title">{title}</h1>
             <Clock seconds={seconds} minutes={minutes} className={isPaused ? 'inactive' : ''} />
+            <ProgressArc percent={progressInPercent} color='blue' className={isPaused ? 'inactive' : ''} />
             <ProgressBar percent={progressInPercent} color='blue' className={isPaused ? 'inactive' : ''} />
             <button onClick={onEdit} disabled={isEditable}>Edytuj</button>
             <button onClick={() => this.handleStart()} disabled={isRunning}>Start</button>

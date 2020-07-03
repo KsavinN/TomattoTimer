@@ -10,7 +10,7 @@ import { CurrentTimeBox } from './CurrentTimeBox';
 export default class TimeBoxList extends React.Component {
     state = {
         timeboxes: [
-            { id: uuid.v4(), title: 'test', totalTimeInMinutes: 10 },
+            { id: uuid.v4(), title: 'test', totalTimeInMinutes: 1 },
             { id: uuid.v4(), title: 'test2', totalTimeInMinutes: 5 },
             { id: uuid.v4(), title: 'test3', totalTimeInMinutes: 1 },
         ],
