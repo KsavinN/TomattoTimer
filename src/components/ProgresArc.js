@@ -29,7 +29,6 @@ class CanvasProgressArc extends React.Component {
     draw() {
         const ctx = this.canvas.current.getContext('2d');
         const { percent, size, color } = this.props;
-        console.log(percent);
         ctx.clearRect(0, 0, size, size);
         ctx.fillStyle = color || 'red';
         ctx.beginPath();

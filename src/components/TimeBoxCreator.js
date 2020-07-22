@@ -1,7 +1,5 @@
 import React from 'react';
 
-import * as uuid from 'uuid';
-
 export class TimeBoxCreator extends React.Component {
     constructor (props) {
         super(props);
@@ -31,9 +29,8 @@ export class TimeBoxCreator extends React.Component {
         const { title, totalTimeInMinutes } = this.form.current.elements;
         event.preventDefault();
         this.props.onCreate({
-            id: uuid.v4(),
             title: title.value,
-            totalTimeInMinutes: totalTimeInMinutes.value,
+            totalTimeInMinutes: Number(totalTimeInMinutes.value),
         });
         title.value = "";
         totalTimeInMinutes.value = "";
